@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #15161a;
+  /* メインカラー（AIプロダクトエンジニアらしい知的なインディゴ） */
+  --brand: #4338ca;
+  --brand-light: #5b50e6;
+  --brand-dark: #2e2a8f;
+  /* 白背景で 4.5:1 を満たすアクセント */
+  --brand-accent: #3730a3;
+}
+
+html, body {
+  /* 横スクロール防止（はみ出し要素があってもビューポート幅に収める） */
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  /* 日本語を文節単位で折り返す（単語の途中で割れない）。Chrome等で有効、
+     非対応ブラウザは通常折り返しにフォールバック。keep-all は横はみ出しの
+     原因になるため使わない。 */
+  word-break: auto-phrase;
+  overflow-wrap: break-word;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* 薄いドットグリッド背景（ヒーロー用） */
+.grid-bg {
+  background-image: radial-gradient(rgba(67, 56, 202, 0.10) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ===== スクロールフェードイン（ScrollObserver.tsx と対） ===== */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* JS 有効時のみ隠す（.anim は layout の早期スクリプトで付与）。
+   JS が動かなければ隠さない＝コンテンツが消えないフェイルセーフ。 */
+.anim .fade-in { opacity: 0; }
+.fade-in.is-visible {
+  animation: fadeSlideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.fade-in.delay-1 { animation-delay: 0.1s; }
+.fade-in.delay-2 { animation-delay: 0.2s; }
+.fade-in.delay-3 { animation-delay: 0.3s; }
+.fade-in.delay-4 { animation-delay: 0.45s; }
+
+/* ===== シャインボタン ===== */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+.btn-shine:hover::after { left: 130%; }
+.btn-shine:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim .fade-in,
+  .fade-in.is-visible {
+    animation: none;
+    opacity: 1;
+  }
+  .btn-shine::after { display: none; }
+}
