@@ -9,8 +9,8 @@ export const site = {
   intro:
     "RAG・業務自動化・AIアプリ開発が専門です。個人で事業（Nompass）を立ち上げた当事者として、企画から運用まで一気通貫で支援します。",
   email: "miyoki.43834@gmail.com",
-  // 公開URL（env優先・未設定なら空）
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "",
+  // 公開URL（env優先・未設定なら本番pages.dev。独自ドメイン取得時はここを変更）
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://miyoki-portfolio.pages.dev",
 
   // Web/LP制作の送客先（別ブランド Nompass）
   nompassUrl: "https://nompass.jp",
