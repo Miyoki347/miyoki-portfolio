@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { works } from "@/data/works";
 import { site } from "@/data/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = site.siteUrl || "https://example.com";
   const staticPaths = ["", "/works", "/about", "/privacy"];

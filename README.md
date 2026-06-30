@@ -34,12 +34,17 @@ npm run dev                         # http://localhost:3000
 
 ## デプロイ（Cloudflare Pages）
 
+本番URL: https://miyoki-portfolio.pages.dev
+
+全ページ静的なので `output: "export"` で `out/` を生成し、wrangler で直接アップロードする
+（Windowsで不安定な next-on-pages は使わない）。
+
 ```bash
-npm run pages:build   # @cloudflare/next-on-pages でビルド
-npm run deploy        # wrangler でデプロイ
+npm run deploy   # next build（out/生成）→ wrangler pages deploy
 ```
 
-通常は GitHub プッシュで Cloudflare Pages が自動デプロイ。
+> GitHub連携の自動デプロイにしたい場合は、Cloudflareダッシュボードで
+> Pagesプロジェクトをこのリポジトリに接続する（一度きりの手動設定）。
 
 ## 未実装（後追い）
 

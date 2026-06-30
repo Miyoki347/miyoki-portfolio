@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "deploy": "npm run pages:build && wrangler pages deploy"
+    "deploy": "next build && wrangler pages deploy out --project-name miyoki-portfolio --branch main --commit-dirty=true"
   },
   "dependencies": {
     "lucide-react": "^1.21.0",
